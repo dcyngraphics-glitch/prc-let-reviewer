@@ -59,7 +59,7 @@ Found by running a full 450-item exam day: after part 1 the app could answer but
 
 ## Known limits
 - 3,507 clean practice items, not an official PRC question bank; 86% have key-only explanations, so treat them as keyed practice, not explanations.
-- Topic tags are keyword-derived and still approximate; weak-area stats are indicative.
+- Topic tags are keyword-derived and still approximate; weak-area stats are indicative. 38 Gen Ed items stay in the neutral `General` bucket because neither the keyword pass nor the curated review could place them.
 - Imported source locators include a stem-hash ref, not a page number; traceability is partial.
 - Some source items have awkward phrasing inherited from the reviewer books; they are kept where the answer key is verifiable.
 - The 2025 TOS uses 10 Gen Ed areas while 2026 program bulletins still publish 5; the app uses 10 as primary categories.
