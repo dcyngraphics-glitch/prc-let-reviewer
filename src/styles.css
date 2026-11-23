@@ -141,6 +141,18 @@ footer { background: var(--deep); color: #a9c0c7; font-size: 11px; padding: 14px
 .score-card.failed { background: #7d2b25; }
 .feedback .linkbtn { color: inherit; padding: 4px 0 0; }
 
+/* post-exam answer review */
+.review-filters { display: flex; gap: 6px; margin: 12px 0; }
+.review-filters .btn { min-height: 40px; padding: 7px 10px; font-size: 12px; }
+.review-list { display: grid; gap: 8px; }
+.review-item { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--muted); border-radius: 10px; padding: 10px 12px; }
+.review-item.correct { border-left-color: var(--good); }
+.review-item.wrong { border-left-color: var(--bad); }
+.review-item.blank { border-left-color: var(--accent); }
+.review-item summary { cursor: pointer; font-size: 13px; line-height: 1.4; min-height: 40px; display: flex; align-items: center; gap: 6px; }
+.review-item p { margin: 8px 0 0; font-size: 13px; line-height: 1.5; }
+.review-item .stem { font-weight: 650; }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

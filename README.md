@@ -26,6 +26,7 @@ Cyron wanted the same style as `bcaed-reviewer-app` but strictly for English maj
 - [x] Audited and stress-tested; fixed soft-lock, double-advance, timer resume, quota mapping, import crash, aided accuracy and verdict autopsy
 - [x] Backfilled 3 TOS gaps with 15 researched, rationalized items; coverage gaps now 0
 - [x] Recovered 1,711 more keyed items with option-aware parsing; bank now 3,507
+- [x] Post-exam answer review with explanations and both clues for every item, including blanks
 - [x] Deployed to GitHub Pages: https://dcyngraphics-glitch.github.io/prc-let-reviewer/
 
 ## Session Log

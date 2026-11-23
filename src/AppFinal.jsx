@@ -27,6 +27,7 @@ export default function AppFinal() {
   const [session, setSession] = useState(null);
   const [storageWarn, setStorageWarn] = useState(false);
   const [crossTabLock, setCrossTabLock] = useState(false);
+  const [reviewFilter, setReviewFilter] = useState('all');
   const [saved, setSaved] = useState(() => {
     try { const raw = localStorage.getItem(SESSION_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; }
   });
@@ -84,8 +85,8 @@ export default function AppFinal() {
     const correct = answered.filter((a) => a.correct).length;
     const part = {
       subject: s.subject, correct, total: s.ids.length, score: pct(correct, s.ids.length),
-      blanks: s.ids.length - answered.length,
-      itemAnswers: Object.entries(s.answers).map(([id, a]) => ({ id, correct: a.correct })),
+      blanks: s.ids.length - answered.length, ids: s.ids,
+      itemAnswers: Object.entries(s.answers).map(([id, a]) => ({ id, correct: a.correct, selected: a.selected, confidence: a.confidence, aided: a.aided || false })),
     };
     let next = { ...stateRef.current };
     if (s.source === 'mock') {
@@ -208,7 +209,7 @@ export default function AppFinal() {
     if (!s || s.selected === null || s.checked || !question) return;
     const correct = s.selected === question.answer;
     setState((prev) => recordAnswer(prev, question, correct, s.source, s.confidence || 'sure', (s.hintLevel || 0) > 0));
-    const updated = { ...s, checked: true, answers: { ...s.answers, [question.id]: { selected: s.selected, correct, confidence: s.confidence } } };
+    const updated = { ...s, checked: true, answers: { ...s.answers, [question.id]: { selected: s.selected, correct, confidence: s.confidence, aided: (s.hintLevel || 0) > 0 } } };
     sessionRef.current = updated;
     setSession(updated);
   };
@@ -265,7 +266,11 @@ export default function AppFinal() {
       const avg = Math.round(0.2 * parts[0].score + 0.4 * parts[1].score + 0.4 * parts[2].score);
       verdict = { avg, floorOk: parts.every((p) => p.score >= 50), passed: avg >= PASSING.average && parts.every((p) => p.score >= 50) };
     }
-    return { correct, total: answered.length, blanks: session.ids.length - answered.length, topics, score: pct(correct, session.ids.length || 1), verdict };
+    const reviewSource = session.source === 'exam'
+      ? (session.parts || []).flatMap((p) => p.ids.map((id) => ({ id, ...((p.itemAnswers || []).find((a) => a.id === id) || {}) })))
+      : session.ids.map((id) => ({ id, ...(session.answers[id] || {}) }));
+    const reviews = reviewSource.map((r) => ({ ...r, q: byId[r.id] })).filter((r) => r.q);
+    return { correct, total: answered.length, blanks: session.ids.length - answered.length, topics, score: pct(correct, session.ids.length || 1), verdict, reviews };
   }, [session]);
 
   const quit = () => {
@@ -586,6 +591,33 @@ export default function AppFinal() {
                   </div>
                 ))}
               </div></>
+            <h2>Answer review — answers and clues revealed after submission</h2>
+            <div className="review-filters" role="group" aria-label="Filter answers">
+              {[['all', `All ${results.reviews.length}`], ['wrong', 'Wrong'], ['blank', 'Blank']].map(([id, label]) => (
+                <button key={id} className={`btn ${reviewFilter === id ? 'primary' : 'ghost'}`} onClick={() => setReviewFilter(id)}>{label}</button>
+              ))}
+            </div>
+            <div className="review-list">
+              {results.reviews.filter((r) => reviewFilter === 'all' || (reviewFilter === 'wrong' && r.correct === false) || (reviewFilter === 'blank' && r.selected === undefined)).map((r) => {
+                const q = r.q;
+                const status = r.selected === undefined ? 'blank' : (r.correct ? 'correct' : 'wrong');
+                const chosen = r.selected === undefined ? null : `${'ABCD'[r.selected]}. ${q.options[r.selected]}`;
+                const keyed = `${'ABCD'[q.answer]}. ${q.options[q.answer]}`;
+                return (
+                  <details className={`review-item ${status}`} key={r.id}>
+                    <summary><strong>{status.toUpperCase()}</strong> · {q.stem.slice(0, 74)}{q.stem.length > 74 ? '…' : ''}</summary>
+                    <p className="stem">{q.stem}</p>
+                    <p><strong>Your answer:</strong> {chosen || 'No answer (scored zero)'}</p>
+                    <p><strong>Correct answer:</strong> {keyed}</p>
+                    <p><strong>Why:</strong> {status === 'correct' ? 'Your choice matches the keyed answer. ' : status === 'blank' ? 'No answer was selected, so it counts as zero. ' : `“${chosen}” is not the keyed answer; “${keyed}” is. `}{q.rationale}</p>
+                    {q.rationaleKind === 'keyed' && <p className="fineprint">Key-only explanation — study the source for the full reasoning.</p>}
+                    <p><strong>Clue 1:</strong> {q.clue1}</p>
+                    <p><strong>Clue 2:</strong> {q.clue2}</p>
+                    <small>Source: {q.source}</small>
+                  </details>
+                );
+              })}
+            </div>
             <div className="card-actions">
               <button className="btn primary" onClick={() => setView('dashboard')}>Dashboard</button>
               <button className="btn ghost" onClick={() => setView('mistakes')}>Review mistakes</button>

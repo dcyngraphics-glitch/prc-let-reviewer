@@ -48,6 +48,9 @@ Added 15 researched questions from LETPass's free English-major sample pages (pu
 ## Bank expansion to 3,507 (2026-11-23)
 `scripts/recover_bank.py` re-parses the committed raw PDF text with option-aware continuation handling and rationale-letter cross-checks. It recovered 1,711 additional keyed items with new `rec-*` IDs, so existing saved progress keeps working. Bank: 3,507 items (730 / 1,479 / 1,298); `npm run coverage` still reports 0 gaps; strict validator passes. 86% of items have key-only explanations, disclosed in the UI.
 
+## Post-exam answer review (2026-11-23)
+Clue button is hidden during mock/exam mode; answers, explanations and both clues are revealed only after submission on the results screen. The review covers every item in all three exam-day parts, including blanks (scored zero), with filters for All / Wrong / Blank. Each row shows your answer, the keyed answer, a "Why" line, both clues and the source. Key-only explanations are labelled honestly rather than presented as full rationales.
+
 ## Known limits
 - 3,507 clean practice items, not an official PRC question bank; 86% have key-only explanations, so treat them as keyed practice, not explanations.
 - Topic tags are keyword-derived and still approximate; weak-area stats are indicative.
