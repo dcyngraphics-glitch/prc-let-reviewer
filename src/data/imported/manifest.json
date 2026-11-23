@@ -1,0 +1,30 @@
+{
+  "generated_from": "src/data/imported/*-final.json",
+  "subjects": {
+    "gened": {
+      "in": 360,
+      "clean": 171,
+      "rejected": 189
+    },
+    "profed": {
+      "in": 1441,
+      "clean": 789,
+      "rejected": 652
+    },
+    "english": {
+      "in": 1423,
+      "clean": 745,
+      "rejected": 678
+    }
+  },
+  "reject_reasons": {
+    "fallback_topic": 705,
+    "trailing_fragment": 668,
+    "truncated_option": 507,
+    "stem_length": 60,
+    "repeated_word": 21,
+    "duplicate_options": 19,
+    "all_of_above": 60,
+    "header_leak": 7
+  }
+}
