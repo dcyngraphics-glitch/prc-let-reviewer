@@ -99,9 +99,7 @@ const shuffled = (arr, rnd) => {
 // TOS-aligned area budgets. Gen Ed: 10 areas x 15. Prof Ed: 23/45/30/22/30.
 // English: sections A 25%, B 30%, C 45% spread over their numbered areas.
 function areaShares(subject) {
-  const areas = questionBank[subject];
-  const names = [...new Set(areas.map((q) => q.topic))];
-  if (subject === 'gened') return names.map((name) => [name, 1 / SUBJECTS.gened.areas.length]);
+  if (subject === 'gened') return SUBJECTS.gened.areas.map((name) => [name, 1 / SUBJECTS.gened.areas.length]);
   if (subject === 'profed') {
     const budgets = {
       'Teaching Profession': 23,
@@ -160,6 +158,12 @@ export function dueMistakes(state) {
   const today = localToday();
   const known = new Set(Object.values(questionBank).flat().map((q) => q.id));
   return (state.mistakes || []).filter((m) => known.has(m.id) && !(state.hiddenIds || []).includes(m.id) && m.due <= today);
+}
+
+// Total saved mistakes (spaced-repetition queue), as opposed to those due today.
+export function savedMistakes(state) {
+  const hidden = new Set(state.hiddenIds || []);
+  return (state.mistakes || []).filter((m) => !hidden.has(m.id)).length;
 }
 
 export function recordAnswer(state, question, correct, source = 'practice', confidence = 'sure', aided = false) {

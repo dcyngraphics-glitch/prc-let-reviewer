@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { questionBank } from './data/index.js';
 import { SUBJECTS, CLUES_PER_SESSION, HINTS_PER_ITEM, PASSING } from './examConfig.js';
 import {
-  PLAN_DAYS, DAILY_QUOTAS, accuracyStat, completeDay, dailySet, dayNumber, dueMistakes,
+  PLAN_DAYS, DAILY_QUOTAS, accuracyStat, completeDay, dailySet, dayNumber, dueMistakes, savedMistakes,
   loadState, recordAnswer, saveState, streak, targetLevel, weakSet, weightedSet, emptyState, startPlan, restartPlan,
 } from './plan2.js';
 
@@ -315,7 +315,7 @@ export default function AppFinal() {
   };
 
   const nav = [
-    ['dashboard', 'Dashboard'], ['plan', '80-day plan'], ['mock', 'Mock exams'], ['mistakes', `Mistakes (${dueMistakes(state).length})`],
+    ['dashboard', 'Dashboard'], ['plan', '80-day plan'], ['mock', 'Mock exams'], ['mistakes', `Mistakes (${savedMistakes(state)})`],
   ];
   const marks = state.daySets?.[day] || {};
   const stat = (subject) => accuracyStat(state, subject);

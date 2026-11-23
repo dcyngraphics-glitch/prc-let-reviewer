@@ -51,6 +51,9 @@ Added 15 researched questions from LETPass's free English-major sample pages (pu
 ## Post-exam answer review (2026-11-23)
 Clue button is hidden during mock/exam mode; answers, explanations and both clues are revealed only after submission on the results screen. The review covers every item in all three exam-day parts, including blanks (scored zero), with filters for All / Wrong / Blank. Each row shows your answer, the keyed answer, a "Why" line, both clues and the source. Key-only explanations are labelled honestly rather than presented as full rationales.
 
+## Area tags and mistake count (2026-11-23)
+`scripts/retag_untagged.py` re-tagged the recovered items whose topic had fallen back to the subject name (248 Gen Ed, 484 English). They now carry a real TOS area where a keyword matches (343 items) or the neutral bucket `General` (389 items) — the subject name is never shown as an area. `areaShares` for Gen Ed now uses the 10 official TOS areas, so `General` items only enter a set through the normal backfill. The nav "Mistakes (n)" count is now the size of the saved spaced-repetition queue; the Mistakes screen still leads with "Due mistakes (n)" for today's review.
+
 ## Known limits
 - 3,507 clean practice items, not an official PRC question bank; 86% have key-only explanations, so treat them as keyed practice, not explanations.
 - Topic tags are keyword-derived and still approximate; weak-area stats are indicative.
