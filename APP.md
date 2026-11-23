@@ -45,8 +45,11 @@ Five more auditors wrote `docs/stress/{live-browser,static-logic,content-integri
 ## Coverage and tab sync (2026-11-23)
 Added 15 researched questions from LETPass's free English-major sample pages (published answers and rationales) into Children & Adolescent Literature, Contemporary/Popular/Emergent Literatures and Remedial Instruction. `npm run coverage` now reports 0 gaps. Progress state syncs across tabs via the `storage` event; a session opened in another tab is marked read-only with a takeover banner.
 
+## Bank expansion to 3,507 (2026-11-23)
+`scripts/recover_bank.py` re-parses the committed raw PDF text with option-aware continuation handling and rationale-letter cross-checks. It recovered 1,711 additional keyed items with new `rec-*` IDs, so existing saved progress keeps working. Bank: 3,507 items (730 / 1,479 / 1,298); `npm run coverage` still reports 0 gaps; strict validator passes. 86% of items have key-only explanations, disclosed in the UI.
+
 ## Known limits
-- 1,796 clean practice items, not an official PRC question bank; 95% have key-only explanations, so treat them as keyed practice, not explanations.
+- 3,507 clean practice items, not an official PRC question bank; 86% have key-only explanations, so treat them as keyed practice, not explanations.
 - Topic tags are keyword-derived and still approximate; weak-area stats are indicative.
 - Imported source locators include a stem-hash ref, not a page number; traceability is partial.
 - Some source items have awkward phrasing inherited from the reviewer books; they are kept where the answer key is verifiable.

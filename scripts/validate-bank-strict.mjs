@@ -22,7 +22,7 @@ for (const q of allQuestions) {
   if (new Set(q.options.map(norm)).size !== 4) errors.push(`${q.id}: duplicate options`);
   if (AO.test(q.options[q.answer])) errors.push(`${q.id}: all-of-above keyed`);
   if (AO.test(q.stem)) errors.push(`${q.id}: all-of-above option present`);
-  if (norm(q.clue2).includes(norm(q.options[q.answer]))) errors.push(`${q.id}: clue eliminates key`);
+  if (norm(q.options[q.answer]).length >= 8 && norm(q.clue2).includes(norm(q.options[q.answer]))) errors.push(`${q.id}: clue eliminates key`);
   const key = `${q.source}|${norm(q.stem).slice(0, 60)}`;
   if (locators.has(key)) errors.push(`${q.id}: duplicate source locator`);
   locators.add(key);

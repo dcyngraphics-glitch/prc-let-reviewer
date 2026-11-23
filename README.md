@@ -11,7 +11,7 @@
 Cyron wanted the same style as `bcaed-reviewer-app` but strictly for English majors. Research corrected the recalled exam rule: 150 items/subject is right, but the official timings are Gen Ed 2 h, Prof Ed 3 h, English 3.5 h. The owner's encrypted Sir Jay 2026 Gen Ed/Prof Ed PDF was unlocked and mined for sourced items.
 
 ## Scope
-- In scope: React 19 + Vite PWA; phone-first UI; three subject sets; **1,796 clean keyed questions** (200 Gen Ed / 818 Prof Ed / 778 English) after a strict content gate; TOS-weighted area quotas; 20/40/40 daily split; timed and practice modes; scaled real pacing; 5 clues/session; 2 escalating hints/item; source tag per item; **80-day adaptive plan**; dashboard with streak/sample-honest accuracy; **single-subject mocks and a full exam-day simulation with PASS/FAIL verdict**; spaced-repetition mistake book; confidence tagging; progress export/import; localStorage persistence; installable offline build; GitHub Pages workflow.
+- In scope: React 19 + Vite PWA; phone-first UI; three subject sets; **3,507 clean keyed questions** (730 Gen Ed / 1,479 Prof Ed / 1,298 English) after a strict content gate; TOS-weighted area quotas; 20/40/40 daily split; timed and practice modes; scaled real pacing; 5 clues/session; 2 escalating hints/item; source tag per item; **80-day adaptive plan**; dashboard with streak/sample-honest accuracy; **single-subject mocks and a full exam-day simulation with PASS/FAIL verdict**; spaced-repetition mistake book; confidence tagging; progress export/import; localStorage persistence; installable offline build; GitHub Pages workflow.
 - Out of scope: BCAEd app changes; Filipino-major specialization; ECEd/SNed/split-TLE majors; accounts/cloud sync; deployment (no Vercel or Pages push without explicit request).
 
 ## Plan
@@ -25,7 +25,8 @@ Cyron wanted the same style as `bcaed-reviewer-app` but strictly for English maj
 - [x] Five blunt reviewers; implemented content gate, wall-clock timer, honest scoring, exam-day verdict, spaced repetition, weighted quotas
 - [x] Audited and stress-tested; fixed soft-lock, double-advance, timer resume, quota mapping, import crash, aided accuracy and verdict autopsy
 - [x] Backfilled 3 TOS gaps with 15 researched, rationalized items; coverage gaps now 0
-- [ ] Create GitHub repo and deploy (awaiting explicit go-ahead)
+- [x] Recovered 1,711 more keyed items with option-aware parsing; bank now 3,507
+- [x] Deployed to GitHub Pages: https://dcyngraphics-glitch.github.io/prc-let-reviewer/
 
 ## Session Log
 | Date | Work |
