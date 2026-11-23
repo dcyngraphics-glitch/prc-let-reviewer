@@ -113,6 +113,10 @@ export default function AppFinal() {
         setState(next);
         sessionRef.current = nextSession;
         finishedRef.current = false;
+        // next() set this guard before calling finishNow and returned early, so its
+        // own 120 ms reset never ran. Without clearing it here the next part is
+        // soft-locked: answers save but "Next item" never advances.
+        advanceRef.current = false;
         setSession(nextSession);
         setView('quiz');
         return;

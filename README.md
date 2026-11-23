@@ -28,6 +28,7 @@ Cyron wanted the same style as `bcaed-reviewer-app` but strictly for English maj
 - [x] Recovered 1,711 more keyed items with option-aware parsing; bank now 3,507
 - [x] Post-exam answer review with explanations and both clues for every item, including blanks
 - [x] Re-tagged recovered items that fell back to the subject name as topic; nav mistake count shows the saved queue
+- [x] Curated second tagging pass (38 Gen Ed items left as `General`); fixed exam-day part-transition soft-lock
 - [x] Deployed to GitHub Pages: https://dcyngraphics-glitch.github.io/prc-let-reviewer/
 
 ## Session Log
